@@ -1,0 +1,35 @@
+PROGRAM: F1 DATA ENTRY SYSTEM
+
+START
+    DISPLAY welcome message
+    READ a positive number of teams
+    READ a positive number of Grand Prix races
+    CALCULATE total driver records = teams * races * 2
+    IF total records exceeds the supported limit THEN
+        DISPLAY an error and stop
+    END IF
+
+    CREATE an array of Grand Prix names
+    FOR each race
+        READ a non-empty Grand Prix name
+        REJECT duplicate race names
+    END FOR
+
+    CREATE a DriverRaceRecord array sized to total records
+    FOR each team
+        READ non-empty team name and car code
+        READ two different non-empty driver names
+        FOR each Grand Prix
+            FOR each of the two drivers
+                READ position (-1 for DNF or a positive integer)
+                READ a finite, non-negative fastest-lap number
+                CREATE a DriverRaceRecord object
+                STORE the object in the array
+            END FOR
+        END FOR
+    END FOR
+
+    READ an output CSV file name
+    USE CsvRaceDataRepository to write the header and each record
+    DISPLAY success or a useful file error
+END

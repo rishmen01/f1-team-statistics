@@ -1,0 +1,64 @@
+CLASS DESIGN PSEUDOCODE
+
+CLASS DriverRaceRecord
+    PRIVATE teamName AS STRING
+    PRIVATE carCode AS STRING
+    PRIVATE driverName AS STRING
+    PRIVATE grandPrix AS STRING
+    PRIVATE positionFinished AS INTEGER
+    PRIVATE fastestLap AS DOUBLE
+
+    CONSTRUCTOR(teamName, carCode, driverName, grandPrix, positionFinished, fastestLap)
+        VALIDATE that each text field is not empty
+        VALIDATE positionFinished is -1 (DNF) or a positive integer
+        VALIDATE fastestLap is a finite, non-negative number
+        STORE all six values in the object
+    END CONSTRUCTOR
+
+    FOR EACH FIELD
+        PROVIDE a GETTER that returns the field value
+        PROVIDE a SETTER that validates and updates the field value
+    END FOR
+
+    METHOD toString()
+        RETURN a readable representation of all six fields
+    END METHOD
+
+    METHOD equals(other)
+        RETURN true when all six fields match the other DriverRaceRecord
+    END METHOD
+
+    METHOD hashCode()
+        RETURN a hash based on all six fields
+    END METHOD
+END CLASS
+
+CLASS TeamRaceSummary
+    PRIVATE teamName, carCode, grandPrix
+    PRIVATE firstDriver AS DriverRaceRecord
+    PRIVATE secondDriver AS DriverRaceRecord
+
+    METHOD addDriver(driverRecord)
+        IF the driver is already present THEN
+            REPORT duplicate driver record
+        ELSE IF firstDriver is empty THEN
+            STORE driverRecord as firstDriver
+        ELSE IF secondDriver is empty THEN
+            STORE driverRecord as secondDriver
+        ELSE
+            REPORT more than two drivers for this team and race
+        END IF
+    END METHOD
+
+    METHOD getCombinedTime()
+        REQUIRE exactly two driver records
+        FOR EACH driver
+            IF positionFinished equals -1 THEN
+                ADD 205.50 seconds to total
+            ELSE
+                ADD driver's fastest lap to total
+            END IF
+        END FOR
+        RETURN total
+    END METHOD
+END CLASS

@@ -1,0 +1,43 @@
+PROGRAM: F1 RACE ANALYSIS SYSTEM
+
+START
+    ASK the user for a CSV file path
+    IF the user chooses to quit THEN stop
+    TRY to read the CSV into a DriverRaceRecord array
+    IF the file is missing or invalid THEN display the error and ask again
+
+    REPEAT
+        DISPLAY menu: all-race analysis, car-code lookup, or quit
+        READ the menu choice
+
+        IF all-race analysis is selected THEN
+            FIND each distinct Grand Prix in the records
+            FOR each Grand Prix
+                SELECT that race's driver records
+                GROUP records by team name and car code
+                REQUIRE exactly two driver records per team
+                LIST teams with at least one finisher
+                LIST teams where both drivers have DNF status
+                CALCULATE each team's combined time
+                    USE 205.50 seconds for each DNF driver
+                DISPLAY the team with the lowest combined time
+                BUBBLE SORT team summaries by combined time descending
+                BUBBLE SORT driver records by lap time descending
+                BUBBLE SORT driver records by lap time ascending
+                DISPLAY each sorted result
+            END FOR
+        ELSE IF car-code lookup is selected THEN
+            READ a non-empty car code
+            FOR each Grand Prix
+                FILTER records by car code and race
+                BUBBLE SORT matching drivers by fastest lap ascending
+                DISPLAY all matching drivers, fastest first
+            END FOR
+            DISPLAY a not-found message when there are no matches
+        ELSE IF quit is selected THEN
+            EXIT the menu loop
+        ELSE
+            DISPLAY an invalid-option message
+        END IF
+    UNTIL the user chooses to quit
+END

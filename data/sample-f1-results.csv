@@ -1,0 +1,7 @@
+TeamName,CarCode,DriverName,GrandPrix,PositionFinished,FastestLap
+"Red Bull Racing","RB20","Driver A","Australian Grand Prix",1,80.0
+"Red Bull Racing","RB20","Driver B","Australian Grand Prix",-1,85.0
+"Ferrari","SF-24","Driver C","Australian Grand Prix",2,79.0
+"Ferrari","SF-24","Driver D","Australian Grand Prix",3,81.0
+"Mercedes","W15","Driver E","Australian Grand Prix",-1,90.0
+"Mercedes","W15","Driver F","Australian Grand Prix",-1,85.0
